@@ -38,7 +38,7 @@ ax2.tick_params(axis='y', labelcolor='green')
 # 移动图例到右上角
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(lines + lines2, labels + labels2, loc='upper right', bbox_to_anchor=(0.85, 1))
+ax1.legend(lines + lines2, labels + labels2, loc='upper right', bbox_to_anchor=(0.85, 1), fontsize=20)
 
 plt.tight_layout()
 

@@ -1,0 +1,228 @@
+\documentclass[12pt,dvipdfmx]{report}
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{color}
+\usepackage{ics}
+\usepackage{latexsym}
+\usepackage{makeidx}
+\usepackage{moreverb}
+\usepackage{tabularx}
+\usepackage{verbatim}
+
+%%%%% 修論特有ページ設定（変更不要） %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{topnumber}{5}%    ページ上部の図表は 5 個まで
+\def\topfraction{1.00}%       ページの上 1.00 まで図表で占めて可
+\setcounter{bottomnumber}{5}% ページ下部の図表は 5 個まで
+\def\bottomfraction{1.00}%    ページの下 1.00 まで図表で占めて可
+\setcounter{totalnumber}{10}% ページあたりの図表は 10 個まで
+\def\textfraction{0.04}%      ページうち本文が占める割合の下限
+
+\def\epsfsize#1#2{\ifnum#1>\hsize\hsize\else#1\fi}
+%\setlength{\baselineskip}{1.5\baselineskip} %double space
+
+%%%%% 修論特有コマンド定義（変更不要） %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{definition}{定義}[chapter]
+\newtheorem{algorithm}{アルゴリズム}[chapter]
+
+%%%%% 貢献への色付け（変更不要） %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newif\ifdraft
+\drafttrue %貢献の色を付ける場合
+%\draftfalse %貢献の色を消す場合
+
+\ifdraft
+\newcommand{\controne}[1]{\color{red} #1 \color{black}}
+\newcommand{\contrtwo}[1]{\color{green} #1 \color{black}}
+\newcommand{\contrthree}[1]{\color{blue} #1 \color{black}}
+\else
+\newcommand{\controne}[1]{#1}
+\newcommand{\contrtwo}[1]{#1}
+\newcommand{\contrthree}[1]{#1}
+\fi
+
+%%%%% 目次生成（変更不要） %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeindex
+
+\begin{document}
+
+%%%%% タイトル定義 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\papercode{ICS-***-***}
+\title{English Title}
+\jtitle{日本語タイトル}
+\major{工学部情報工学科}
+\author{著者名}
+\date{令和Y年MM月DD日提出}
+\supervisor{安積 卓也 教授}
+\labname{安積研究室}
+\studentID{XXTIYYY}
+\labaffiliation{埼玉大学 理工学研究科・工学部} % 変更不要
+\maketitle
+
+%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{roman}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Here is abstract.
+
+%%%%% Contents（変更不要） %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+%%%%% Introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introduction}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+\section{Background}
+
+Background
+
+\section{Purpose and Objective}
+
+Purpose and Objective
+
+The contributions of this thesis are as follows:
+\begin{itemize}
+    \item \controne{Contribution one.}
+    \item \contrtwo{Contribution two.}
+    \item \contrthree{Contribution three.}
+\end{itemize}
+
+\section{Construction}
+The rest of thesis organised as follows:
+Chapter Y explains ... 
+Chapter Z gives conclusion and future works.
+
+
+
+\chapter{Figure Sample}
+
+Figure~\ref{sample_figure}.
+
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=\linewidth]{fig/sample.eps}
+    \caption{Sample of figure.}
+    \label{sample_figure}
+\end{figure}
+
+
+
+\chapter{Table Sample}
+
+Table~\ref{sample_table}.
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{table}[tbp]
+    \centering
+    \caption{Comparison of this thesis with existing studies.}
+    \begin{tabularx}{\linewidth}{|l|Y|Y|Y|Y|}\hline
+                                        &    Hoge    &    Fuga    &    Piyo    &    Neko     \\ \hline
+    A method~\cite{kato2018autoware}    &            & \checkmark & \checkmark & \checkmark  \\ \hline
+    B method~\cite{li2022autoware_perf} & \checkmark &            & \checkmark & \checkmark  \\ \hline
+    C method~\cite{dds1.4}              & \checkmark & \checkmark &            & \checkmark  \\ \hline
+    D method                            & \checkmark &            & \checkmark &             \\ \hline
+    This thesis                         & \checkmark & \checkmark & \checkmark & \checkmark  \\ \hline
+    \end{tabularx}
+    \label{sample_table}
+\end{table}
+
+\chapter{Fugafuga}
+\section{Foofoo}
+hehehehe
+
+\section{Hyohyo}
+
+fufufufufufufu.
+
+\chapter{Conclusion}
+\section{Summary}
+
+We have ...
+
+\section{Future Works}
+
+Future works are as follows: ...
+
+\newpage
+
+%%%%% Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\noindent
+Here is acknowledgements.
+
+\newpage
+
+%%%%% Publications %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Publications}
+\addcontentsline{toc}{chapter}{Publications}
+
+\begin{list}%
+ {} %default label
+ {} %formatting parameter
+ \item Refereed papers published in journals or books (first author)
+       \begin{itemize}
+	\item Hogehoge: ....
+       \end{itemize}
+ \item Refereed papers published in journals or books (co-author)
+       \begin{itemize}
+	\item Hogehoge: ....
+       \end{itemize}
+ \item Refereed papers published in international conference proceedings (first author)       \begin{itemize}
+	\item Hogehoge: ....
+       \end{itemize}
+
+ \item Refereed papers published in international conference proceedings (co-author)
+       \begin{itemize}
+	\item Hogehoge: ....
+       \end{itemize}
+ \item Refereed papers published in local conference proceedings (first author)
+       \begin{itemize}
+	\item Hogehoge: ....
+       \end{itemize}
+ \item Refereed papers published in local conference proceedings (co-author)
+       \begin{itemize}
+	\item Hogehoge: ....
+       \end{itemize}
+\end{list}
+
+%%%%% Reference（変更不要） %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+%%%%% Appendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\thesection}{\Alph{section}}
+\appendix
+\addcontentsline{toc}{chapter}{Appendix}
+\chapter{Huroku}
+
+kokokokoo.
+
+\chapter{MataHuroku}
+
+kokokokoko.
+
+%%%%% Appendix ここまで %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printindex
+%\addcontentsline{toc}{chapter}{Index}
+%目次にIndexを表示させる場合は.idxファイルのtheindex環境の中で
+%上記コマンドを置く
+\end{document}
