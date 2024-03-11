@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<CommonInstructionSet>
+	<Instruction name="load">
+		<PowerConsumption>
+			<Cost>1.656</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="store">
+		<PowerConsumption>
+			<Cost>0.864</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="add">
+		<PowerConsumption>
+			<Cost>0.864</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="sub">
+		<PowerConsumption>
+			<Cost>0.864</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="mul">
+		<PowerConsumption>
+			<Cost>0.864</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="udiv">
+		<PowerConsumption>
+			<Cost>3.888</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="ret">
+		<PowerConsumption>
+			<Cost>0.718</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="call">
+		<PowerConsumption>
+			<Cost>0.718</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="icmp">
+		<PowerConsumption>
+			<Cost>0.718</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+	<Instruction name="br">
+		<PowerConsumption>
+			<Cost>0.000</Cost>
+			<Impact>0.000</Impact>
+		</PowerConsumption>
+	</Instruction>
+</CommonInstructionSet>
