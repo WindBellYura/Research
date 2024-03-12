@@ -28,7 +28,7 @@ def count_commands(xml_file_path, txt_file_path):
     return commands_count
 
 def main():
-    st.title("Command Counter")
+    st.title("Power Predictor")
 
     xml_file = st.file_uploader("Upload XML file", type=['xml'])
     txt_file = st.file_uploader("Upload TXT file", type=['txt'])

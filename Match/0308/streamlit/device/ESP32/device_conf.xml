@@ -1,0 +1,1 @@
+<device_info><device_name>ESP32</device_name><maker>Espressif Systems</maker><processor_name>Tensilica Xtensa LX6</processor_name><processor_number>2</processor_number><maximum_frequency>240</maximum_frequency><sram_size>0.5</sram_size><flash_memory>0.4375</flash_memory></device_info>

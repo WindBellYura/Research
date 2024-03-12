@@ -44,7 +44,7 @@ df = pd.DataFrame({
 })
 df
 
-st.button(label='select')
+st.button(label='select', key='select',help='select your data')
 
 #----------------------------------#
 option = st.sidebar.selectbox(
