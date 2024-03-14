@@ -1,0 +1,576 @@
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage{ascmac}
+\usepackage{xspace}
+\usepackage{pdfpages}
+\usepackage{pifont}
+\usepackage{array}
+\usepackage{changepage}
+\usepackage{xr}
+
+
+\newcommand\st{\textsuperscript{st}\xspace}
+\newcommand\nd{\textsuperscript{nd}\xspace}
+\newcommand\rd{\textsuperscript{rd}\xspace}
+\externaldocument{main}
+
+\begin{document}
+
+% cover letter
+\begin{flushleft}
+  2023-12-18\newline 
+  [Journal of Information Processing]\newline
+  Title: Communication Overhead Description Schema for Multi Core Processor in Model-based Development\newline
+  Authors: Yue Hou, Yutaro Kobayashi, Hiroshi Fujimoto, and Takuya Azumi \newline
+\end{flushleft}
+\textbf{Dear Editor and Reviewer,}\newline
+
+We are pleased to resubmit our manuscript entitled ``Communication Overhead Description Schema to Improve Core Allocation for Model-based Development" for consideration in your esteemed journal. This submission follows a previous round of review where it received mixed feedback, including one conditional acceptance and one reject decision.
+
+Following the insightful comments from the reviewers, we have undertaken substantial revisions to address the concerns raised. Specifically, we have enhanced the consistency between the objectives, methods, and evaluation sections, as suggested.
+
+In response to feedback regarding the novelty of our communication overhead estimation method, we have clarified in \textbf{Figs.~9},\textbf{~10} and \textbf{Table~3} that the comparison of this proposal's methodology is SHIM 2.0 by means of legends to highlight the uniqueness and innovation of our methodology.
+
+To clarify the utility of our proposed XML description reduction, we have enriched the `Abstract,' `Introduction,' and `Evaluation' sections of the paper. These additions elucidate how our schema significantly improves core allocation and execution performance, particularly in large-scale model-based systems.
+
+Finally, addressing the feedback on our communication overhead description method, we have included a new section titled `Using the Proposal Schema in MBP,' This section aims to demonstrate the practical application and efficiency of our schema in real-world model-based development scenarios.
+
+Please note that all changes made in the manuscript are highlighted in red for your ease of review. We believe these revisions comprehensively address the previous concerns and significantly enhance the value of our work.
+We appreciate your time and consideration in reviewing our revised manuscript and look forward to your feedback.\newline\newline
+
+\begin{flushleft}
+  Yours sincerely,\newline
+
+  Yue Hou,\newline
+  Saitama University\newline
+  Email address: hou.y.556@ms.saitama-u.ac.jp
+\end{flushleft}
+
+\clearpage
+
+
+\section{Response to Meta-reviewer}
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason Based on Conditional Acceptance Requirement 1 of Meta-reviewer}
+
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Communication overhead is one of the most critical factors in optimizing parallel applications/software on multi/many-core processors.
+So, I understand the authors' motivation to improve the communication overhead estimation accuracy while reducing the estimation cost.
+However, I didn't find enough novelty to see the contributions mentioned in this paper.
+\end{adjustwidth}
+    
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Thank you very much for your thoughtful comment. In response, we have carefully revised our manuscript to better highlight the novelty of our study. Specifically, we have expanded the related work section to include a thorough discussion of the paper [12]. 
+This addition clarifies how our research both builds upon and diverges from the foundational study presented in the paper [12].
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added comparison with the previous work [12] in the ``Introduction" section (Section 1)}
+In the previous work [12], we proposed a new schema for describing communication overhead per-API without relying on communication libraries. This approach was assessed through a detailed requirements analysis, use case studies, and instance diagram example evaluation. On the other hand, this paper shows a method to create an actual hardware SHIM based on our proposed approach, along with a method to generate a communication overhead file from this SHIM. Furthermore, the practicality of this method was confirmed by integrating the generated communication overhead file into a parallelization technique. In addition, a new partitioning method was proposed to improve the reusability of the schema further.
+\end{itembox}\\
+
+% \begin{itembox}[|]{hoge}
+%   $\bullet$\\
+%   $\bullet$\\
+% \end{itembox}
+
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason Based on Conditional Acceptance Requirement 2 of Meta-reviewer}
+
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+ Regarding the communication overhead estimation, I didn't find enough novelty in the proposed method because this paper does not sufficiently explain the competitor (SHIM 2.0?).
+  It is not clear what the differences are between the proposed scheme and the competitor.
+\end{adjustwidth}
+    
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Thanks for your considerate feedback. The figure and table in the originally submitted manuscript did not clearly show the comparison object. To address this issue, we have revised the figure legends in \textbf{Figs.~9} and \textbf{10}, and changed the name of column in \textbf{Table~3} to clearly identify SHIM 2.0 as the target of comparison.
+Through these revisions, we aim to clarify the distinctiveness and innovation of our approach, ensuring that the contributions of our research are clearly understood and appreciated. 
+\end{adjustwidth}
+\bigskip
+% \begin{itembox}[|]{Added information to Figures 6 and 7 in the ``Evaluation" section (Section 5)}
+% \centerline{\includegraphics [scale=0.30] {fig/eva_core.pdf}}
+% \centerline{Fig.~6  ~Comparison of communication overheads (inter-Core).}
+% \bigskip
+% \centerline{\includegraphics [scale=0.30] {fig/eva_cls.pdf}}
+% \centerline{Fig.~7  ~Comparison of communication overheads (inter-Cluster).}
+% \bigskip
+
+% \end{itembox}\\
+
+\begin{itembox}[|]{Added information to \textbf{Fig.~9} and \textbf{10} in the ``Evaluation" section (Section 5)}
+\centerline{\centerline{
+    \includegraphics[scale=0.25]{fig/max_no_msize0.pdf}
+    \hfill % 在两幅图像之间添加空间
+    \includegraphics[scale=0.25]{fig/max_no_msize.pdf} % 替换为第二个图像的路径
+}}
+\centerline{\textbf{Fig.~9}  ~Comparison of execution times for random models (constant message size).}
+\bigskip
+% 在同一行中插入两张图像
+\centerline{
+    \includegraphics[scale=0.25]{fig/eva_map0.pdf}
+    \hfill % 在两幅图像之间添加空间
+    \includegraphics[scale=0.25]{fig/eva_map.pdf} % 替换为第二个图像的路径
+}
+\centerline{\textbf{Fig.~10}  ~Comparison of execution times for \textit{map\_callback} models.}
+\bigskip
+
+% \bigskip
+% % 在同一行中插入两张图像
+% \centerline{
+%     \includegraphics[scale=1]{fig/table0.eps}
+%     \hfill % 在两幅图像之间添加空间
+%     \includegraphics[scale=0.25]{fig/table1.eps} % 替换为第二个图像的路径
+% }
+% \centerline{Fig.~10  ~Comparison of execution times for \textit{map\_callback} models.}
+% \bigskip
+
+\end{itembox}\\
+
+
+\begin{itembox}[|]{Added information to \textbf{Table~3} in the ``Evaluation" section (Section 5)}
+\centerline{\textbf{Table~3} ~Comparison of the amount of communication overhead).}
+\bigskip
+\centerline{\centerline{
+    \includegraphics[scale=1.5]{fig/table0.eps}
+}}
+\bigskip
+% 在同一行中插入两张图像
+\centerline{
+    \includegraphics[scale=1.35]{fig/table1.eps}
+}
+\bigskip
+
+
+
+\end{itembox}\\
+
+
+
+
+
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason Based on Conditional Acceptance Requirement 3 of Meta-reviewer}
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+ Also, linear equations (e.g., Equation (1) in this paper) are so typical for communication overhead estimation that I don't think this provides enough novelty.
+  It is required to explain the evaluation environments and the algorithms used by the competitor more clearly.
+  This is not a problem with the schema but a problem with the overhead estimation method.
+\end{adjustwidth}
+    
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Thank you very much for the careful reading of our manuscript. The linear equation function proposed in the paper did not estimate the communication overhead file, rather it was mechanically generated. Since the equation was general, we have removed the equation to avoid misunderstanding.
+In addition, a new section has been added and described to make it easier to understand how to use the proposed schema.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the “Using the Proposal Schema in MBP” section (Section 4)}
+In order for MBP to use SHIM communication overhead information, a communication overhead description file must be created. This is because MBP reads the overhead description file in the core allocation phase and performs core allocation considering the communication overhead. The algorithm shown in Algorithm 1 is described in the following.
+\end{itembox}\\
+
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason Based on Conditional Acceptance Requirement 4 of Meta-reviewer}
+
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Regarding the XML description reduction, I'm not sure how this is useful and important.
+  Utilizing software tools to generate such XML files would be the typical/first choice.
+  Then, the problem is when the toolchain estimates the communication overhead, namely at the timing of XML file generation or XML file parsing.
+  Performance evaluation with small-scale and large-scale models shows us the proposed scheme can improve execution performance.
+  However, I did not understand how much the proposed scheme could optimize the core allocation.
+  We need more analysis data to understand that, such as the number of tasks allocated to each core, actual communication overhead during the application execution, etc.
+\end{adjustwidth}
+    
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Your meticulous examination of our manuscript is highly appreciated. As you say, this paper does not discuss core assignments in detail. This is because the purpose of this paper is to propose a schema and not to improve on the core assignments. We will only argue that the execution time of the model was reduced when the proposed schema was applied to the existing method, i.e., that the proposed schema is useful.
+In our previous paper, we included the improvement of the core assignments in the title and did not explain the above in detail, which caused misunderstanding. We have added a supplementary explanation as follows to avoid misunderstandings.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Abstract" section}
+However, SHIM cannot fully demonstrate communication overhead as it describes overhead in instruction units. With this, we propose a new schema that can describe the communication overhead in API units. In addition, an XML split specification is proposed to increase reusability for the existing SHIM schema
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the “Introduction” section (Section 1)}
+This paper shows improvement in results by generating a communication overhead description file with appropriate message size and using it in existing methods.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the “Evaluation” section (Section 5)}
+Finally, the communication overhead description file generated by the proposed method uses MBP to parallelize, and the execution times are compared to show the usefulness of the proposed schema.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+However, since the purpose of this paper is only to improve SHIM, MBP, an existing method, will not be discussed.
+\end{itembox}\\
+
+
+
+\newpage
+\section{Response to 1\st reviewer}
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason Based on Conditional Acceptance Requirement 1 of reviewer 1}
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+The performance improvement using the proposed method can be confirmed, but is this the improvement rate that should be expected based on theoretical values? Please explain the validity of the performance improvement numerically.
+\end{adjustwidth}
+    
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+We value your comprehensive reading of our manuscript deeply. In fact, this paper does not delve into the specifics of core assignments. This is primarily because its objective is to introduce a framework rather than to enhance core assignment strategies. Our focus is on demonstrating that the application of this new framework to pre-existing methods has led to a reduction in the model's execution time, thereby highlighting the framework's effectiveness. In our earlier work, we emphasized core assignment improvement in the title but did not thoroughly explain the concept, leading to some confusion. To clarify and prevent any further misunderstandings, we have now included an additional explanation in the text.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Abstract" section}
+However, SHIM cannot fully demonstrate communication overhead as it describes overhead in instruction units. With this, we propose a new schema that can describe the communication overhead in API units. In addition, an XML split specification is proposed to increase reusability for the existing SHIM schema
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the “Introduction” section (Section 1)}
+This paper shows improvement in results by generating a communication overhead description file with appropriate message size and using it in existing methods.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the “Evaluation” section (Section 5)}
+Finally, the communication overhead description file generated by the proposed method uses MBP to parallelize, and the execution times are compared to show the usefulness of the proposed schema.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+However, since the purpose of this paper is only to improve SHIM, MBP, an existing method, will not be discussed.
+\end{itembox}\\
+
+
+
+
+\newpage
+\begin{flushleft}
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason Based on Conditional Acceptance Requirement 2 of reviewer 1}
+    \textbf{Comment:}
+    \bigskip
+    \begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Also, in the small-scale model, the execution time increases with the number of cores, but shouldn't unnecessary allocation that would increase the execution time be prevented if the communication overhead is clear with this method?
+    \end{adjustwidth}
+  \end{flushleft}
+
+  \begin{flushleft}
+    \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+ Thank you for your diligent and careful review of our work. This paper doesn't extensively cover core assignment details. This stems from our aim to present a new schema rather than to refine core assignment methods. The main point of our research is to show that integrating this novel schema with existing methods decreases the operational time of the model, thus proving the schema's utility. In our prior publication, we highlighted the enhancement of core assignment in our title, yet didn't elaborate on it sufficiently, resulting in some misunderstandings. To make things clearer and avoid future misinterpretations, we've now incorporated an extra explanatory note into our text."
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Abstract" section}
+However, SHIM cannot fully demonstrate communication overhead as it describes overhead in instruction units. With this, we propose a new schema that can describe the communication overhead in API units. In addition, an XML split specification is proposed to increase reusability for the existing SHIM schema
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the “Introduction” section (Section 1)}
+This paper shows improvement in results by generating a communication overhead description file with appropriate message size and using it in existing methods.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the “Evaluation” section (Section 5)}
+Finally, the communication overhead description file generated by the proposed method uses MBP to parallelize, and the execution times are compared to show the usefulness of the proposed schema.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+However, since the purpose of this paper is only to improve SHIM, MBP, an existing method, will not be discussed.
+\end{itembox}\\
+
+
+
+
+\newpage
+
+
+\section{Response to 2\nd reviewer}
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 1 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+ First of all, English used in this paper is not organized well and very hard to read. 
+ I think this paper does not provide valuable information to readers under the current form.
+ This paper does not have enough consistency among the objectives, methods, and evaluations.
+\end{adjustwidth}
+    
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+Thank you for your diligent and careful review of our work. First, we corrected the overall English and optimized the composition of the paper. We also added descriptions of objectives, methods, and evaluations for better readability.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Approach" section (Section 3)}
+     In addition, set the multiplicity of \textit{FrequencyVoltageSet} to ``0" or greater for the XML partitioning specification. In this way, XML with only \textit{ComponentSet} can be created. The XML schema uses the ID/IDREF attribute for the reference relation; the ID/IDREF attribute indicates the reference relation between two elements and must be unique in the same XML. 
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    Evaluate the effectiveness of using multiple linear formulas by comparing the communication overhead error when one linear formula is used versus two.
+    The parameters approximated by a single linear equation are $Coefficient$ value of 48.5, $Intercept$ value of 12,999 for receiving, $Coefficient$ value of 20.0, and $Intercept$ value of 40,800 for sending.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    This is because the increase in communication overhead does not fully scale with the message size.
+    If the error is to be further reduced, this can be achieved by setting the range to three and using three linear expressions.
+    Thus, using multiple linear formulas improves the ﬂexibility of the schema.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    First, the parallelization results when using the random model are reviewed. 
+    As shown in \textbf{Fig.~9}, the results of the execution time for core allocation use both the MBP and proposed approaches. The findings indicate that the execution time decreased when more cores were used, and the execution time was further reduced when implementing the proposed method. Specifically, with 16 cores, a speedup of 1.19 times was achieved, indicating a noteworthy improvement.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    Next, the parallelization results when using the models representing a portion of the actual autonomous-driving functionality are reviewed.
+\end{itembox}\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 2 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    I cannot catch the novelty or usefulness from the claims of this paper.  I think the combination of SHIM and Model-based parallelization looks an interesting idea for me while the authors did not discuss its originality in Section 2. 
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Thank you for the precision and care in reviewing our paper. As a supplement, We added the origins and benefits of SHIM and Model-based parallelization in Section~1.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Introduction" section (Section 1)}
+    Among these, MATLAB/Simulink [7] has been attracting attention because of its ability to automatically generate C code from models. 
+    However, the drawback is that parallelized C code cannot be generated.
+    Therefore, the Embedded Multicore Consortium has developed the \textit{Model-Based Parallelizer (MBP)} [8], automatically generating parallelized C code. 
+    MPB uses information called \textit{SHIM (Software-Hardware Interface for Multi-Many-Core)} [9,10].
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 3 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    In Section 3, the authors describe the discussion that led to the porposed schema. 
+    However, I feel these discussion does not provide the explanation of actual proposed scheme clearly.  
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Your thorough and careful reading of our work is much appreciated. The actual proposed schema is explained in detail in the previous paper [12]. We have also added a supplemental explanation in Section 3 to make this clear.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added a subsection in the ``Approach" section (Section 3)}
+    Since the proposed schema is designed with SHIM 2.0 in mind, the proposed schema can be incorporated without modification.
+    Next, the modifications to SHIM 2.0 that are necessary to incorporate the proposed schema are described.
+    The entire modified schema is shown in \textbf{Fig.~3}.
+    The multiplicity of \textit{FrequencyVoltageSet} is set to zero or higher because the XML split specification, which is explained in Section 3.3.2, is involved.
+    In addition, although the addition of \textit{APISet} eliminates the role of \textit{CommunicationSet}, \textit{CommunicationSet} is not deleted and is deprecated.
+    The elements of SHIM 2.0 that are changed by the addition of \textit{APISet} are described.
+    The element to be changed is \textit{Performance}.
+    Previously, the performance had a \textit{Pitch} element and a \textit{Latency} element. These two elements inherited \textit{AbstractPerformance}.
+    After the change, \textit{Pitch} and \textit{Latency} have been modified to select two elements, \textit{Triplet} and \textit{LinearParameter}.
+    For more information, please refer to the previous paper [16].
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 4 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    I cannot catch what is a communication overhead schema that is a primary concern of this paper.  Further, I cannot catch the problem to be solved in this paper.  
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Thank you for dedicating time to meticulously review our manuscript. We have clarified in Section 1 about the communication overhead schema and the problem we are trying to solve.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Introduction" section (Section 1)}
+    However, the CommunicationSet only covers communication, and does not take into account processes necessary for communication, such as memory access and obtaining IDs for sending and receiving.
+    Therefore, the problem is that the communication overhead is underestimated when estimating the communication overhead.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Introduction" section (Section 1)}
+    By using this schema, users can obtain accurate communication overhead information from the SHIM and use it for tools and other purposes.
+    In addition, a new XML split specification is proposed to increase the reuse of the existing SHIM schema. By reusing the partitioned XML, the reuse of the SHIM schema will increase, and the burden on SHIM users will be reduced.
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 5 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    The most of contents presented in Section 3 seems to be described in [12].  Hence, I wonder what is new in this paper compared with [12]?  What is the newly implemented parts originally introduced in this paper?  
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    We are very thankful for your detailed and careful reading of our manuscript. We added the paper [12] to Related Work and compare it with the proposed method in Section ~6.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Related Work" section (Section 6)}
+    In the previous work [12], we proposed a new schema for describing communication overhead per-API without relying on communication libraries. This approach was assessed through a detailed requirements analysis, use case studies, and instance diagram example evaluation. On the other hand, this paper shows a method to create an actual hardware SHIM based on our proposed approach, along with a method to generate a communication overhead file from this SHIM. Furthermore, the practicality of this method was confirmed by integrating the generated communication overhead file into a parallelization technique. In addition, a new partitioning method was proposed to further improve the reusability of the schema.
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 6 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+   In Section 4, I cannot find how the evaluation data is observed.
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Thank you for the precise and thorough examination of our paper. A description of the data measurements used in the evaluation has been added to Section 5.1.
+    Also, to avoid misunderstandings, we clarified whether the values were obtained by calculation or measurement.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    Each measurement was repeated 1,000 times, and the average value of the center 80\% of the acquired values was used.
+\end{itembox}\\
+
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    In fact, only the communication part is measured because SHIM 2.0 was not able to perform the calculation. This is because the target API was too complex to parse and SHIM 2.0 could not estimate on an instruction-by-instruction basis.
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 7 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+   I cannot understand why the results presented in this paper becomes evidences for communication overhead error reduction and communication overhead itself. 
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    We express our profound appreciation for your in-depth review of our work. A description of the data measurements used in the evaluation has been added to Section 5.1.
+    Also, to avoid misunderstandings, we clarified whether the values were obtained by calculation or measurement.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Evaluation" section (Section 5)}
+    The errors between the communication overhead calculated by the proposed method and SHIM 2.0 and the actual measurement are shown in \textbf{Figs.~6} and \textbf{7}.
+    In fact, only the communication part is measured because SHIM 2.0 was not able to perform the calculation. This is because the target API was too complex to parse and SHIM 2.0 could not estimate on an instruction-by-instruction basis.
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 8 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    What kind of behaviors do the Equation (2) to (5) represent?
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Grateful for the attentive and comprehensive reading of our paper.
+    Two equations were removed because they were misleading.
+    For Equation (2), we have added in Sections 3.2.4 and 5.2.1 that the least-squares method is used.
+    For Equation (5), we used a pseudo-algorithm to show how the parameters are obtained, and added the actual usage in Section 5.2.1 to make it easier to understand.
+\end{adjustwidth}
+\bigskip
+\begin{itembox}[|]{Added sentences in the ``Approach" section (Section 3)}
+    Define the coefficient and intercept as necessary parameters for the linear equation.
+    In this paper, the least-squares method is used to compute these two parameters.
+    Furthermore, the proposed schema divides linear expressions by range, allowing for the use of appropriate parameters when calculating overhead.
+    \textit{Latency} is the element provided to select these two exclusively. The mechanism for exclusive selection is similar to the way \textit{APIoverhead} selects \textit{NodeSet} and \textit{LinkSet}.
+\end{itembox}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Response to Peer Review Feedback: Addressing Non-Acceptance Reason 9 of reviewer 2}
+\begin{flushleft}
+  \textbf{Comment:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Characters in most of Figures in this paper are too small to read.
+\end{adjustwidth}
+    
+\begin{flushleft}
+  \textbf{Our reply:}
+\end{flushleft}
+\begin{adjustwidth}{1cm}{1cm}  % 调整左右缩进的距离
+    Your detailed and thoughtful reading of our manuscript is deeply appreciated. We adjusted the size of the figures in the paper.
+\end{adjustwidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

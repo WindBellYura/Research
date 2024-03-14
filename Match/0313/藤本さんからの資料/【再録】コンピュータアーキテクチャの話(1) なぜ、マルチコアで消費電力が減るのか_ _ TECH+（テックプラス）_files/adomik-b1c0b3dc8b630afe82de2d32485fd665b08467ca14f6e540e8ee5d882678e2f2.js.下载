@@ -1,0 +1,1 @@
+window.Adomik=window.Adomik||{},Adomik.randomAdGroup=function(){var d=Math.random();switch(!1){case!(d<.09):return"ad_ex"+Math.floor(100*d);case!(d<.1):return"ad_bc";default:return"ad_opt"}};
