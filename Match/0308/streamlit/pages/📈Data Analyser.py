@@ -64,9 +64,15 @@ def save_feature_points_ui():
     if st.button("Save"):
         if 'features' in st.session_state and st.session_state['features']:
             features_df = pd.DataFrame(st.session_state['features'])
-            file_name = "feature_" + st.session_state['uploaded_file'].name
+
+            # 确保feature文件夹存在
+            if not os.path.exists('feature'):
+                os.makedirs('feature')
+
+            file_name = os.path.join('feature', "feature_" + st.session_state['uploaded_file'].name)  # 修改保存路径
             features_df.to_csv(file_name, index=False)
-            st.success(f"The feature point table data has been saved to file '{file_name}'.")
+
+            st.success(f"The feature point table data has been saved to '{file_name}'.")
         else:
             st.warning("No feature points were found.")
 
@@ -197,47 +203,69 @@ def plot_data_with_altair(extracted_data_with_energy):
 
 def save_data_to_csv(extracted_data_with_energy):
     file_path = 'merge_data.csv'
-    name = str(st.session_state['uploaded_file'].name).split(".")[0]
+    name = str(st.session_state['uploaded_file'].name).split(".")[0]  # 获取当前文件名作为列名
 
+    # 确定时间列，假设时间步长为1ms，从0开始
+    time_steps = list(range(len(extracted_data_with_energy)))
+    extracted_data_with_energy.insert(0, 'Time_ms', time_steps)  # 在数据框架的最前面插入时间列
+
+    # 检查文件是否存在以决定是创建新文件还是更新现有文件
     if os.path.exists(file_path):
-        # 文件存在，读取现有数据
         existing_df = pd.read_csv(file_path)
-
-        if 'Time_ms' not in existing_df.columns and 'Time_ms' in extracted_data_with_energy.columns:
-            # 如果existing_df中没有'Time_ms'列，但在新数据中有，则初始化为0
-            existing_df['Time_ms'] = 0  # 这里的0是占位符
-
-        if name in existing_df.columns:
-            existing_df.drop(columns=[name], inplace=True)
-
-        # 确保DataFrame长度一致
-        if len(existing_df) < len(extracted_data_with_energy):
-            additional_rows = len(extracted_data_with_energy) - len(existing_df)
-            last_time_ms_value = existing_df['Time_ms'].iloc[-1] if not existing_df.empty else 0
-            time_step = 1  # 假设每步时间增加1，根据您的数据调整
-
-            # 生成新的Time_ms值
-            new_time_ms_values = [last_time_ms_value + (i + 1) * time_step for i in range(additional_rows)]
-
-            # 为新行创建一个空DataFrame
-            new_rows_df = pd.DataFrame({'Time_ms': new_time_ms_values})
-
-            # 将新行追加到现有DataFrame
-            existing_df = pd.concat([existing_df, new_rows_df], ignore_index=True)
-
-        # 添加或更新新列
-        extracted_data_with_energy = extracted_data_with_energy.reindex(range(len(existing_df)), fill_value=np.nan)
-        existing_df[name] = extracted_data_with_energy[name].values
-
+        # 如果时间列不存在，则创建它
+        if 'Time_ms' not in existing_df.columns:
+            existing_df.insert(0, 'Time_ms', list(range(len(existing_df))))
+        # 合并旧数据和新数据
+        combined_df = pd.merge(existing_df, extracted_data_with_energy[['Time_ms', name]], on='Time_ms', how='outer')
     else:
-        # 文件不存在，直接保存新数据
-        existing_df = extracted_data_with_energy
+        combined_df = extracted_data_with_energy.rename(columns={extracted_data_with_energy.columns[1]: name})
 
     # 保存更新后的DataFrame到CSV
-    existing_df.to_csv(file_path, index=False)
+    combined_df.to_csv(file_path, index=False)
     st.success("Data saved successfully.")
 
+def load_merged_data():
+    try:
+        df = pd.read_csv('merge_data.csv')
+        return df
+    except FileNotFoundError:
+        st.error("The file 'merge_data.csv' was not found.")
+        return pd.DataFrame()
 
+def plot_dynamic_data():
+    df = load_merged_data()
+    if df.empty:
+        st.write("No data available to display.")
+        return
+
+    if 'Time_ms' not in df.columns:
+        st.error("The required 'Time_ms' column is not present in the dataset.")
+        return
+
+    series_names = df.columns.drop('Time_ms')
+    selected_series = st.multiselect('Select data series to display:', series_names, default=series_names.tolist())
+
+    if not selected_series:
+        st.warning('Please select at least one data series.')
+        # 如果没有数据系列被选中，显示一个简单的提示信息，而不尝试绘制图表
+        return
+
+    # 准备绘图数据
+    data_long = pd.melt(df, id_vars=['Time_ms'], value_vars=selected_series, var_name='Series', value_name='Energy_Wms')
+
+    # 使用Altair绘制图表
+    chart = alt.Chart(data_long).mark_area(opacity=0.5).encode(
+        x='Time_ms:Q',
+        y=alt.Y('Energy_Wms:Q', title='Energy_Wms'),
+        color='Series:N',
+        tooltip=['Time_ms', 'Series', 'Energy_Wms']
+    ).properties(
+        width=800,
+        height=400,
+        title='Dynamic Data Visualization over Time'
+    ).interactive()
+
+    st.altair_chart(chart, use_container_width=True)
 
 def main():
     set_page_config()
@@ -259,6 +287,9 @@ def main():
     if 'extracted_data_with_energy' in st.session_state:
         if st.button("Save Result"):
             save_data_to_csv(st.session_state['extracted_data_with_energy'])
+   
+    st.title("Dynamic Data Visualization")
+    plot_dynamic_data()
 
 if __name__ == "__main__":
     main()
