@@ -17,23 +17,23 @@ width = 0.35  # 柱子的宽度
 fig, ax1 = plt.subplots(figsize=(10, 7))
 
 # 绘制 Execution Time，颜色设为蓝色
-rects1 = ax1.bar(x - width/2, execution_time, width, label='Execution Time', color='blue')
+rects1 = ax1.bar(x - width/2, execution_time, width, label='Execution Time', color='#C1C7D6')
 
 # 创建第二个坐标轴来绘制 Energy Consumption，颜色设为绿色
 ax2 = ax1.twinx()
-rects2 = ax2.bar(x + width/2, energy_consumption, width, label='Energy Consumption', color='green')
+rects2 = ax2.bar(x + width/2, energy_consumption, width, label='Energy Consumption', color='#0E205E')
 
 # 添加标题和标签
-ax1.set_ylabel('Execution Time (clock cycles)', color='blue')  # 设置左坐标轴的标签颜色
-ax2.set_ylabel('Energy Consumption (nanojoules)', color='green')  # 设置右坐标轴的标签颜色
+ax1.set_ylabel('Execution Time (clock cycles)', color='black')  # 设置左坐标轴的标签颜色
+ax2.set_ylabel('Energy Consumption (nanojoules)', color='black')  # 设置右坐标轴的标签颜色
 ax1.set_title('Execution Time and Energy Consumption of Different Commands')
 ax1.set_xticks(x)
 ax1.set_xticklabels(commands)
 
 # 设置左坐标轴刻度的颜色为蓝色
-ax1.tick_params(axis='y', labelcolor='blue')
+ax1.tick_params(axis='y', labelcolor='black')
 # 设置右坐标轴刻度的颜色为绿色
-ax2.tick_params(axis='y', labelcolor='green')
+ax2.tick_params(axis='y', labelcolor='black')
 
 # 移动图例到右上角
 lines, labels = ax1.get_legend_handles_labels()
